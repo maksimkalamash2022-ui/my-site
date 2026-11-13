@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GREENBYTE — комп’ютерний клуб</title>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#050e08;--card:#0c1d13;--card2:#112a1b;--g:#b6ff3c;--g2:#1fd16b;--t:#e8f5ec;--m:#8aa596;--line:#1d3a29}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(900px 500px at 80% -10%,#12401f55,transparent),radial-gradient(700px 500px at -10% 40%,#b6ff3c14,transparent),var(--bg);color:var(--t);font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;min-height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-x:hidden;display:flex;flex-direction:column}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:18px;padding:12px 5vw;background:#050e08cc;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;letter-spacing:2px;font-size:20px;color:var(--g);text-shadow:0 0 18px #b6ff3c66;white-space:nowrap}
+.logo span{color:var(--t)}
+nav{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+nav a{color:var(--m);text-decoration:none;padding:8px 14px;border-radius:99px;font-size:14px;white-space:nowrap;transition:.3s}
+nav a:hover{color:var(--t);background:var(--card)}
+nav a.on{color:#06140a;background:linear-gradient(90deg,var(--g),var(--g2));font-weight:700;box-shadow:0 0 20px #b6ff3c44}
+.acc{border:1px solid var(--g);color:var(--g);background:none;padding:8px 14px;border-radius:99px;cursor:pointer;font-size:14px;white-space:nowrap;transition:.3s}
+.acc:hover{background:var(--g);color:#06140a}
+main{max-width:1100px;width:100%;margin:0 auto;padding:40px 5vw 40px;flex:1}
+.page{display:none}
+.page.on{display:block;animation:pg .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes pg{from{opacity:0;transform:translateY(24px) scale(.99);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.page.on .rv{opacity:0;animation:up .7s cubic-bezier(.2,.8,.2,1) forwards}
+.page.on .rv:nth-child(1){animation-delay:.05s}.page.on .rv:nth-child(2){animation-delay:.12s}.page.on .rv:nth-child(3){animation-delay:.19s}.page.on .rv:nth-child(4){animation-delay:.26s}.page.on .rv:nth-child(5){animation-delay:.33s}.page.on .rv:nth-child(6){animation-delay:.4s}.page.on .rv:nth-child(n+7){animation-delay:.47s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(34px,7vw,66px);line-height:1.05;margin-bottom:16px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--g),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(26px,4vw,38px);margin-bottom:8px}
+.sub{color:var(--m);margin-bottom:28px;max-width:560px;line-height:1.6}
+.btn{display:inline-block;border:0;cursor:pointer;padding:13px 26px;border-radius:12px;font-weight:700;font-size:15px;color:#06140a;background:linear-gradient(90deg,var(--g),var(--g2));transition:.3s;box-shadow:0 6px 24px #b6ff3c33}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 32px #b6ff3c66}
+.btn.o{background:none;color:var(--t);border:1px solid var(--line);box-shadow:none}
+.btn.o:hover{border-color:var(--g)}
+.btn:disabled{opacity:.4;pointer-events:none}
+.hero{padding:40px 0 20px;position:relative}
+.hero::after{content:"";position:absolute;right:-60px;top:0;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,#b6ff3c33,transparent 70%);animation:fl 6s ease-in-out infinite;z-index:-1}
+@keyframes fl{50%{transform:translateY(30px) scale(1.1)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:22px;transition:.35s}
+.card:hover{transform:translateY(-6px);border-color:var(--g);box-shadow:0 14px 40px #b6ff3c1f}
+.big{font-size:34px;font-weight:800;color:var(--g)}
+.mut{color:var(--m);font-size:14px;line-height:1.5}
+.ico{font-size:34px;margin-bottom:10px}
+.tag{display:inline-block;font-size:12px;padding:4px 10px;border-radius:99px;background:#b6ff3c1c;color:var(--g);margin-bottom:10px}
+.price{font-size:38px;font-weight:800;color:var(--g)}.price small{font-size:14px;color:var(--m);font-weight:400}
+.card ul{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px;font-size:14px;color:var(--m)}
+.card li::before{content:"✓ ";color:var(--g)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--m);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:14px;transition:.3s}
+.chip.on,.chip:hover{border-color:var(--g);color:var(--g)}
+.chip.on{background:#b6ff3c14}
+input,select{background:var(--card);border:1px solid var(--line);color:var(--t);padding:12px 14px;border-radius:12px;font-size:15px;width:100%;outline:none;transition:.3s;font-family:inherit}
+input:focus,select:focus{border-color:var(--g);box-shadow:0 0 0 3px #b6ff3c22}
+label{font-size:13px;color:var(--m);display:grid;gap:6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:22px}
+.pcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:10px;margin-bottom:22px}
+.pc{aspect-ratio:1;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--t);cursor:pointer;display:grid;place-content:center;text-align:center;font-size:12px;transition:.3s;animation:pop .4s backwards}
+.pc b{font-size:20px}.pc:hover:not(.x){transform:scale(1.08);border-color:var(--g)}
+.pc.on{background:linear-gradient(135deg,var(--g),var(--g2));color:#06140a;box-shadow:0 0 24px #b6ff3c66}
+.pc.x{opacity:.3;cursor:not-allowed}
+@keyframes pop{from{opacity:0;transform:scale(.6)}}
+.sum{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:20px;border:1px solid var(--g);border-radius:18px;background:#b6ff3c0d}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border:0}
+.bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g),var(--g2));transition:width 1s}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--g);color:#06140a;padding:13px 22px;border-radius:12px;font-weight:700;transition:.5s cubic-bezier(.2,.8,.2,1);z-index:50;max-width:90vw}
+#toast.s{transform:translate(-50%,0)}
+footer{text-align:center;color:var(--m);font-size:13px;padding:30px;margin-top:auto;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.em{width:46px;height:46px;display:block;filter:drop-shadow(0 6px 5px #0009);animation:emIn .9s cubic-bezier(.3,1.6,.5,1) .1s backwards,fl2 4.2s ease-in-out infinite;animation-delay:.1s,var(--fd,0s);transition:scale .5s cubic-bezier(.3,1.6,.5,1),filter .4s}
+@keyframes emIn{from{opacity:0;scale:.2;rotate:-35deg;translate:0 20px}}
+@keyframes fl2{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -6px;rotate:-4deg}}
+.grid>.card:nth-child(2n) .em{--fd:-1.4s}.grid>.card:nth-child(3n) .em{--fd:-2.6s}.grid>.card:nth-child(5n) .em{--fd:-.7s}
+.card:hover .em{scale:1.22;filter:drop-shadow(0 10px 10px #b6ff3c55)}
+.card:hover .em.s{scale:1;filter:none}
+a{text-decoration:none}
+.ico{height:52px}
+.em.s{width:20px;height:20px;display:inline-block;vertical-align:-5px;margin-right:6px;animation:none;filter:none}
+.bk{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:22px;display:grid;gap:24px}
+.step{font-size:13px;color:var(--m);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.step b{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--g2));color:#06140a;display:grid;place-items:center;font-size:12px}
+.days{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 12px;scrollbar-width:none}
+.day{flex:0 0 66px;border:1px solid var(--line);background:var(--card);color:var(--t);border-radius:16px;padding:10px 0;cursor:pointer;text-align:center;transition:.35s cubic-bezier(.3,1.5,.5,1)}
+.day small{display:block;color:var(--m);font-size:12px}.day b{font-size:20px}
+.day:hover{transform:translateY(-4px);border-color:var(--g)}
+.day.on{background:linear-gradient(160deg,var(--g),var(--g2));color:#06140a;transform:translateY(-4px) scale(1.05);box-shadow:0 8px 24px #b6ff3c55}.day.on small{color:#06140acc}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.tm{border:1px solid var(--line);background:var(--card);color:var(--t);border-radius:12px;padding:10px 0;cursor:pointer;font-size:14px;transition:.3s}
+.tm:hover:not(:disabled){border-color:var(--g);color:var(--g);transform:translateY(-2px)}
+.tm:disabled{cursor:not-allowed}
+.tm.on{background:#b6ff3c1c;border-color:var(--g);color:var(--g);box-shadow:0 0 16px #b6ff3c33;transform:scale(1.06)}
+.seg{position:relative;display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;max-width:420px}
+.seg i{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/4);border-radius:10px;background:linear-gradient(135deg,var(--g),var(--g2));transition:transform .45s cubic-bezier(.3,1.4,.5,1);box-shadow:0 0 18px #b6ff3c55}
+.seg button{position:relative;z-index:1;background:none;border:0;color:var(--t);padding:11px 0;cursor:pointer;font-size:14px;font-weight:600;transition:.3s}
+.seg button.on{color:#06140a}
+@keyframes sl{from{opacity:0;transform:translateX(-18px)}}
+.hi{animation:sl .55s cubic-bezier(.2,.8,.2,1) backwards}
+.item .tag{margin:0;white-space:nowrap}.tag.c{background:#ff5a5a22;color:#ff8a7a}
+#acc .stats .card{cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.page.on .rv{opacity:1}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a7a"/><stop offset="1" stop-color="#e5322d"/></linearGradient><linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc8ff"/><stop offset="1" stop-color="#2a6df4"/></linearGradient><linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe36e"/><stop offset="1" stop-color="#ffa800"/></linearGradient><linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9cf06a"/><stop offset="1" stop-color="#2bb34a"/></linearGradient><linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d29bff"/><stop offset="1" stop-color="#7a3df0"/></linearGradient><linearGradient id="gOrange" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb066"/><stop offset="1" stop-color="#ff5a1f"/></linearGradient><linearGradient id="gWhite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#c9d4e0"/></linearGradient></defs></svg>
+<header>
+<div class="logo">GREEN<span>BYTE</span></div>
+<nav id="nav">
+<a href="#home" data-p="home">Головна</a><a href="#games" data-p="games">Ігри</a><a href="#prices" data-p="prices">Ціни</a><a href="#booking" data-p="booking">Бронювання</a><a href="#tournaments" data-p="tournaments">Турніри</a><a href="#news" data-p="news">Новини</a>
+</nav>
+<button class="acc" id="accBtn" onclick="location.hash='account'">Кабінет</button>
+</header>
+<main>
+
+<section class="page" id="p-home">
+<div class="hero">
+<div class="rv"><span class="tag">● Відчинено щодня 10:00 – 06:00</span></div>
+<h1 class="rv">Грай на <em>максимум</em>.<br>Без лагів.</h1>
+<p class="sub rv">RTX 4070, монітори 240 Гц, механічні клавіатури та атмосфера, у якій хочеться залишитися до ранку. Обери ПК і забронюй за хвилину.</p>
+<div class="rv"><a class="btn" href="#booking">Забронювати ПК</a> &nbsp; <a class="btn o" href="#prices">Дивитись ціни</a></div>
+</div>
+<div class="stats">
+<div class="card rv"><div class="big">24</div><div class="mut">ігрові ПК у 3 зонах</div></div>
+<div class="card rv"><div class="big">240 Гц</div><div class="mut">монітори в кожній зоні</div></div>
+<div class="card rv"><div class="big">1 Гбіт</div><div class="mut">оптичний інтернет</div></div>
+<div class="card rv"><div class="big">50+</div><div class="mut">встановлених ігор</div></div>
+</div>
+</section>
+
+<section class="page" id="p-games">
+<h2 class="rv">Бібліотека ігор</h2>
+<p class="sub rv">Усе вже встановлено й оновлено. Просто сідай і грай.</p>
+<div class="row rv" id="gf"></div>
+<div class="grid rv" id="gg"></div>
+</section>
+
+<section class="page" id="p-prices">
+<h2 class="rv">Ціни</h2>
+<p class="sub rv">Оберіть зону під свої задачі. Нічний пакет діє з 22:00 до 06:00.</p>
+<div class="grid" id="pg"></div>
+<div class="card rv" style="margin-top:16px"><span class="tag">Знижки</span><div class="mut">Студентам –10% зі студентським квитком. Пакет 5 годин — 4-та година у подарунок. Накопичуйте бонуси в особистому кабінеті: 1 бонус за кожні 10 грн.</div></div>
+</section>
+
+<section class="page" id="p-booking">
+<h2 class="rv">Бронювання комп’ютера</h2>
+<p class="sub rv">Оберіть дату, час і вільне місце. Зайняті комп’ютери затемнені.</p>
+<div class="bk rv"><div><div class="step"><b>1</b>Оберіть дату</div><div class="days" id="bd"></div></div><div><div class="step"><b>2</b>Час початку</div><div class="times" id="bt"></div></div><div><div class="step"><b>3</b>Тривалість</div><div class="seg" id="bh"></div></div></div>
+<div class="row rv" id="bz"></div>
+<div class="pcs" id="bp"></div>
+<div class="sum rv"><div><div class="mut" id="bs">Оберіть комп’ютер</div><div class="price" id="bpr">0 ₴</div></div><button class="btn" id="bb" disabled>Забронювати</button></div>
+</section>
+
+<section class="page" id="p-tournaments">
+<h2 class="rv">Турніри</h2>
+<p class="sub rv">Змагайся з найкращими в місті. Реєстрація відкрита для користувачів із кабінетом.</p>
+<div class="grid" id="tg"></div>
+</section>
+
+<section class="page" id="p-news">
+<h2 class="rv">Новини клубу</h2>
+<p class="sub rv">Оновлення, акції та результати змагань.</p>
+<div class="grid" id="ng"></div>
+</section>
+
+<section class="page" id="p-account">
+<div id="acc"></div>
+</section>
+
+</main>
+<footer>© 2026 GREENBYTE · вул. Шевченка, 12 · +380 00 000 00 00</footer>
+<div id="toast"></div>
+
+<script>
+var $=function(s){return document.querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var G={
+cs:'<circle cx="32" cy="32" r="21" fill="none" stroke="url(#gRed)" stroke-width="6"/><path d="M32 4v14M32 46v14M4 32h14M46 32h14" stroke="url(#gRed)" stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="32" r="4" fill="#fff"/>',
+shield:'<path d="M32 4L8 12v18c0 15 10 26 24 30 14-4 24-15 24-30V12z" fill="url(#gBlue)"/><path d="M32 14L18 19v11c0 9 6 16 14 19z" fill="#fff" opacity=".3"/>',
+target:'<circle cx="32" cy="32" r="27" fill="url(#gRed)"/><circle cx="32" cy="32" r="19" fill="#fff"/><circle cx="32" cy="32" r="11" fill="url(#gRed)"/><circle cx="32" cy="32" r="4" fill="#fff"/>',
+swords:'<path d="M10 10l36 36M54 10L18 46" stroke="url(#gGold)" stroke-width="7" stroke-linecap="round"/><path d="M40 40l12 12M24 40L12 52" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/>',
+chute:'<path d="M6 30a26 24 0 0 1 52 0c-6-6-14-6-26 0-12-6-20-6-26 0z" fill="url(#gOrange)"/><path d="M8 31L30 54M56 31L34 54M32 30v24" stroke="#fff" stroke-width="2"/><circle cx="32" cy="57" r="5" fill="url(#gBlue)"/>',
+rocket:'<path d="M32 4c12 8 16 22 12 36H20C16 26 20 12 32 4z" fill="url(#gWhite)"/><circle cx="32" cy="24" r="6" fill="url(#gBlue)"/><path d="M20 40L10 50l4 4 8-4zM44 40l10 10-4 4-8-4z" fill="url(#gRed)"/><path d="M26 44h12l-6 15z" fill="url(#gOrange)"/>',
+car:'<path d="M6 40l6-14c1-3 3-4 6-4h28c3 0 5 1 6 4l6 14v10H6z" fill="url(#gRed)"/><path d="M16 26h32l4 10H12z" fill="#bde7ff"/><circle cx="18" cy="50" r="6" fill="#222"/><circle cx="46" cy="50" r="6" fill="#222"/>',
+city:'<rect x="6" y="26" width="14" height="32" rx="2" fill="url(#gPurple)"/><rect x="24" y="8" width="16" height="50" rx="2" fill="url(#gBlue)"/><rect x="44" y="22" width="14" height="36" rx="2" fill="url(#gPurple)"/><path d="M29 18h6M29 28h6M29 38h6M11 34h4M11 44h4M49 30h4M49 40h4" stroke="#ffe66b" stroke-width="3"/>',
+cube:'<path d="M32 6l24 13v26L32 58 8 45V19z" fill="url(#gGreen)"/><path d="M32 6l24 13-24 13L8 19z" fill="#fff" opacity=".35"/><path d="M32 32v26" stroke="#1c7a32" stroke-width="2"/>',
+ball:'<circle cx="32" cy="32" r="26" fill="#fff"/><path d="M32 20l11 8-4 13H25l-4-13z" fill="#222"/><path d="M32 6v14M43 28l14-4M39 41l9 12M25 41l-9 12M21 28L7 24" stroke="#222" stroke-width="2.5"/>',
+sword:'<path d="M50 6l8 8-30 30-8-8z" fill="url(#gWhite)"/><path d="M14 34l16 16" stroke="url(#gGold)" stroke-width="6" stroke-linecap="round"/><path d="M20 44L8 56" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/>',
+pan:'<circle cx="26" cy="34" r="21" fill="#4b5563"/><circle cx="26" cy="34" r="15" fill="#1f2937"/><path d="M42 22l17-14" stroke="#8b5a2b" stroke-width="7" stroke-linecap="round"/><circle cx="26" cy="34" r="9" fill="#fff"/><circle cx="26" cy="34" r="4.5" fill="url(#gGold)"/>',
+fire:'<path d="M32 4c4 12 18 18 18 34a18 18 0 0 1-36 0c0-8 4-12 8-16 0 6 3 8 5 8-2-10 0-18 5-26z" fill="url(#gOrange)"/><path d="M32 30c3 6 9 9 9 17a9 9 0 0 1-18 0c0-6 5-8 9-17z" fill="url(#gGold)"/>',
+moon:'<path d="M44 6a26 26 0 1 0 14 38A22 22 0 0 1 44 6z" fill="url(#gGold)"/><path d="M50 8v8M46 12h8" stroke="#fff" stroke-width="3" stroke-linecap="round"/>',
+trophy:'<path d="M18 6h28v16c0 10-6 18-14 18S18 32 18 22z" fill="url(#gGold)"/><path d="M18 12H6c0 12 6 18 14 18M46 12h12c0 12-6 18-14 18" stroke="url(#gGold)" stroke-width="4" fill="none"/><rect x="28" y="38" width="8" height="10" fill="url(#gGold)"/><rect x="18" y="48" width="28" height="9" rx="3" fill="url(#gOrange)"/>',
+bolt:'<path d="M38 2L12 36h16l-4 26 28-38H36z" fill="url(#gGold)"/>',
+calendar:'<rect x="8" y="12" width="48" height="46" rx="8" fill="#fff"/><path d="M8 20a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v8H8z" fill="url(#gRed)"/><path d="M20 6v10M44 6v10" stroke="#555" stroke-width="4" stroke-linecap="round"/><path d="M18 38h6M29 38h6M40 38h6M18 48h6M29 48h6" stroke="#444" stroke-width="4" stroke-linecap="round"/>',
+user:'<circle cx="32" cy="22" r="12" fill="url(#gGold)"/><path d="M10 58c0-14 10-22 22-22s22 8 22 22z" fill="url(#gBlue)"/>'};
+var EM={"\u{1F52B}":"cs","\u{1F6E1}":"shield","\u{1F3AF}":"target","\u2694":"swords","\u{1FA82}":"chute","\u{1F680}":"rocket","\u{1F697}":"car","\u{1F306}":"city","\u26CF":"cube","\u26BD":"ball","\u{1F5E1}":"sword","\u{1F373}":"pan","\u{1F525}":"fire","\u{1F319}":"moon","\u{1F3C6}":"trophy","\u26A1":"bolt"};
+function em(x){return EM[String(x).replace(/\uFE0F/g,"")]||"bolt"}
+function ic(n,c){return '<svg class="em '+(c||"")+'" viewBox="0 0 64 64">'+(G[n]||"")+'<ellipse cx="26" cy="13" rx="14" ry="5" fill="#fff" opacity=".22"/></svg>'}
+var mem={};
+var S={get:function(k,d){try{var v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch(e){}return k in mem?mem[k]:d},
+set:function(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+var games=[["CS2","Шутер","🔫"],["Dota 2","MOBA","🛡️"],["Valorant","Шутер","🎯"],["League of Legends","MOBA","⚔️"],["Fortnite","Battle Royale","🪂"],["Apex Legends","Battle Royale","🚀"],["GTA V","Екшн","🚗"],["Cyberpunk 2077","RPG","🌆"],["Minecraft","Пісочниця","⛏️"],["EA FC 26","Спорт","⚽"],["Elden Ring","RPG","🗡️"],["PUBG","Battle Royale","🍳"]];
+var zones=[{id:"std",n:"Standard",p:70,from:1,to:12,spec:["RTX 4060","i5-13400F","165 Гц"]},{id:"pro",n:"Pro",p:100,from:13,to:20,spec:["RTX 4070","i7-13700F","240 Гц"]},{id:"vip",n:"VIP",p:140,from:21,to:24,spec:["RTX 4080","i9-14900K","360 Гц"]}];
+var tours=[{n:"CS2 Green Cup",d:"22 листопада, 15:00",pr:"20 000 ₴",s:16,t:12,g:"🔫"},{n:"Dota 2 Night League",d:"29 листопада, 19:00",pr:"15 000 ₴",s:8,t:5,g:"🛡️"},{n:"Valorant Open",d:"6 грудня, 16:00",pr:"12 000 ₴",s:16,t:6,g:"🎯"},{n:"EA FC 26 Battle",d:"13 грудня, 14:00",pr:"5 000 ₴",s:32,t:21,g:"⚽"}];
+var news=[["Нова VIP-зона з RTX 4080","12 листопада","Відкрили 4 місця з моніторами 360 Гц та крісла преміум-класу.","🔥"],["Нічний пакет за 300 ₴","8 листопада","8 годин гри з 22:00 до 06:00 та безлімітна кава.","🌙"],["Підсумки CS2 Green Cup: кваліфікація","3 листопада","32 команди, 8 вийшли до фіналу. Стартує 22 листопада.","🏆"],["Оновлено залізо в зоні Pro","28 жовтня","Нові відеокарти RTX 4070 та монітори 240 Гц.","⚡"]];
+
+/* ----- routing ----- */
+var pages=["home","games","prices","booking","tournaments","news","account"];
+function route(){
+var h=(location.hash||"#home").slice(1);if(pages.indexOf(h)<0)h="home";
+document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on")});
+var el=$("#p-"+h);void el.offsetWidth;el.classList.add("on");
+document.querySelectorAll("#nav a").forEach(function(a){a.classList.toggle("on",a.dataset.p===h)});
+if(h==="account")renderAcc();
+if(h==="booking"){syncCtl();renderPCs()}
+window.scrollTo({top:0,behavior:"smooth"});
+}
+window.addEventListener("hashchange",route);
+
+function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("s");setTimeout(function(){t.classList.remove("s")},2800)}
+function user(){return S.get("gb_user",null)}
+function updBtn(){var u=user(),b=$("#accBtn");b.innerHTML=u?ic("user","s"):"Увійти";if(u)b.appendChild(document.createTextNode(u.name))}
+
+/* ----- games ----- */
+var gcat="Усі";
+function renderGames(){
+var cats=["Усі"].concat(games.map(function(g){return g[1]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+$("#gf").innerHTML=cats.map(function(c){return '<button class="chip'+(c===gcat?' on':'')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+$("#gg").innerHTML=games.filter(function(g){return gcat==="Усі"||g[1]===gcat}).map(function(g,i){return '<div class="card" style="animation:pop .5s '+(i*0.05)+'s backwards"><div class="ico">'+ic(em(g[2]))+'</div><b>'+g[0]+'</b><div class="mut">'+g[1]+'</div></div>'}).join("");
+document.querySelectorAll("#gf .chip").forEach(function(b){b.onclick=function(){gcat=b.dataset.c;renderGames()}});
+}
+
+/* ----- prices ----- */
+$("#pg").innerHTML=zones.map(function(z,i){return '<div class="card rv" style="animation-delay:'+(i*.1)+'s"><span class="tag">'+z.n+'</span><div class="price">'+z.p+' ₴<small> / год</small></div><ul>'+z.spec.map(function(s){return '<li>'+s+'</li>'}).join("")+'<li>Нічний пакет: '+(z.p*4+20)+' ₴</li></ul><a class="btn o" href="#booking" onclick="bzone=\''+z.id+'\'">Забронювати</a></div>'}).join("");
+
+/* ----- booking ----- */
+var bzone="std",bsel=null;
+var WD=["Нд","Пн","Вт","Ср","Чт","Пт","Сб"],bdate="",tdy="",bstart=18,bdur=2,DUR=[1,2,3,5];
+function ymd(d){return new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)}
+function syncCtl(){
+var nh=new Date().getHours(),first=null;
+document.querySelectorAll("#bd .day").forEach(function(b){b.classList.toggle("on",b.dataset.v===bdate)});
+document.querySelectorAll("#bt .tm").forEach(function(b){var off=bdate===tdy&&+b.dataset.t<=nh;b.disabled=off;b.style.opacity=off?.3:1;if(!off&&first===null)first=+b.dataset.t});
+if(bdate===tdy&&bstart<=nh&&first!==null)bstart=first;
+document.querySelectorAll("#bt .tm").forEach(function(b){b.classList.toggle("on",+b.dataset.t===bstart)});
+document.querySelectorAll("#bh button").forEach(function(b){b.classList.toggle("on",+b.dataset.h===bdur)});
+$("#bh i").style.transform="translateX("+DUR.indexOf(bdur)*100+"%)";
+}
+(function(){
+tdy=ymd(new Date());bdate=tdy;var h="",i,d,t;
+for(i=0;i<10;i++){d=new Date();d.setDate(d.getDate()+i);h+='<button class="day" data-v="'+ymd(d)+'"><small>'+(i?WD[d.getDay()]:"Сьогодні")+'</small><b>'+d.getDate()+'</b></button>'}
+$("#bd").innerHTML=h;h="";
+for(t=10;t<=22;t++)h+='<button class="tm" data-t="'+t+'">'+t+':00</button>';
+$("#bt").innerHTML=h;
+$("#bh").innerHTML='<i></i>'+DUR.map(function(x){return '<button data-h="'+x+'">'+x+' год</button>'}).join("");
+$("#bd").onclick=function(e){var b=e.target.closest(".day");if(b){bdate=b.dataset.v;syncCtl();renderPCs()}};
+$("#bt").onclick=function(e){var b=e.target.closest(".tm");if(b&&!b.disabled){bstart=+b.dataset.t;syncCtl();renderPCs()}};
+$("#bh").onclick=function(e){var b=e.target.closest("button");if(b){bdur=+b.dataset.h;syncCtl();renderPCs()}};
+syncCtl();
+})();
+function hash(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return Math.abs(h)}
+function taken(n){
+var k=bdate+"|"+bstart;
+if(hash(k+"|"+n)%100<38)return true;
+return S.get("gb_book",[]).some(function(b){return b.date===bdate&&b.pc===n&&bstart<b.start+b.h&&b.start<bstart+bdur});
+}
+function renderPCs(){
+$("#bz").innerHTML=zones.map(function(z){return '<button class="chip'+(z.id===bzone?' on':'')+'" data-z="'+z.id+'">'+z.n+' · '+z.p+' ₴/год</button>'}).join("");
+var z=zones.filter(function(x){return x.id===bzone})[0],h="";
+for(var n=z.from;n<=z.to;n++){var x=taken(n);h+='<button class="pc'+(x?' x':'')+(bsel===n&&!x?' on':'')+'" data-n="'+n+'" style="animation-delay:'+((n-z.from)*.03)+'s"><b>'+n+'</b>'+(x?'зайнято':'вільно')+'</button>'}
+$("#bp").innerHTML=h;
+if(bsel&&(bsel<z.from||bsel>z.to||taken(bsel)))bsel=null;
+document.querySelectorAll("#bz .chip").forEach(function(b){b.onclick=function(){bzone=b.dataset.z;bsel=null;renderPCs()}});
+document.querySelectorAll("#bp .pc:not(.x)").forEach(function(b){b.onclick=function(){bsel=+b.dataset.n;renderPCs()}});
+var hrs=bdur,tot=bsel?z.p*hrs:0;
+$("#bs").textContent=bsel?"ПК №"+bsel+" · "+z.n+" · "+hrs+" год":"Оберіть комп’ютер";
+$("#bpr").textContent=tot+" ₴";$("#bb").disabled=!bsel;
+}
+
+$("#bb").onclick=function(){
+if(!user()){toast("Спочатку увійдіть у кабінет");location.hash="account";return}
+var z=zones.filter(function(x){return x.id===bzone})[0],a=S.get("gb_book",[]);
+a.push({id:Date.now(),date:bdate,start:bstart,h:bdur,pc:bsel,zone:z.n,sum:z.p*bdur});
+S.set("gb_book",a);bsel=null;renderPCs();toast("Заброньовано! Деталі в особистому кабінеті");
+};
+
+/* ----- tournaments ----- */
+function renderTours(){
+var reg=S.get("gb_reg",[]);
+$("#tg").innerHTML=tours.map(function(t,i){var r=reg.indexOf(t.n)>=0,c=t.t+(r?1:0);
+return '<div class="card rv" style="animation-delay:'+(i*.1)+'s"><div class="ico">'+ic(em(t.g))+'</div><b>'+t.n+'</b><div class="mut">'+ic("calendar","s")+t.d+'</div><div class="mut">'+ic("trophy","s")+'Призовий фонд: '+t.pr+'</div><div class="bar"><i style="width:'+(c/t.s*100)+'%"></i></div><div class="mut" style="margin:6px 0 14px">Зареєстровано '+c+' / '+t.s+'</div><button class="btn'+(r?' o':'')+'" data-n="'+i+'">'+(r?'✓ Ви зареєстровані':'Зареєструватись')+'</button></div>'}).join("");
+document.querySelectorAll("#tg .btn").forEach(function(b){b.onclick=function(){
+if(!user()){toast("Увійдіть, щоб зареєструватись");location.hash="account";return}
+var r=S.get("gb_reg",[]),n=tours[+b.dataset.n].n,i=r.indexOf(n);
+if(i<0){r.push(n);toast("Ви зареєстровані на "+n)}else{r.splice(i,1);toast("Реєстрацію скасовано")}
+var tlg=S.get("gb_th",[]);tlg.push({n:n,a:i<0?"Реєстрація":"Скасовано",ts:Date.now()});S.set("gb_th",tlg);
+S.set("gb_reg",r);renderTours();}});
+}
+
+/* ----- news ----- */
+$("#ng").innerHTML=news.map(function(n,i){return '<div class="card rv" style="animation-delay:'+(i*.1)+'s"><div class="ico">'+ic(em(n[3]))+'</div><span class="tag">'+n[1]+'</span><h3 style="margin-bottom:8px">'+n[0]+'</h3><div class="mut">'+n[2]+'</div></div>'}).join("");
+
+/* ----- account ----- */
+function renderAcc(){
+var u=user(),box=$("#acc");
+if(!u){
+box.innerHTML='<div class="card" style="max-width:440px;margin:auto"><h2>Вхід у кабінет</h2><p class="sub">Введіть ім’я, прізвище та телефон. Акаунт створюється автоматично.</p><div class="fields" style="grid-template-columns:1fr"><label>Ім’я<input id="an" placeholder="Олександр" autocomplete="given-name"></label><label>Прізвище<input id="as" placeholder="Коваленко" autocomplete="family-name"></label><label>Телефон<input id="ap" placeholder="+380501234567" inputmode="tel" pattern="\+?[0-9]*" maxlength="13" autocomplete="tel"></label></div><button class="btn" id="al" style="width:100%">Увійти</button></div>';
+$("#ap").oninput=function(){var v=this.value,pl=v.charAt(0)==="+";this.value=(pl?"+":"")+v.replace(/\D/g,"").slice(0,12)};
+$("#al").onclick=function(){var n=$("#an").value.trim(),sn=$("#as").value.trim(),p=$("#ap").value.trim();
+if(n.length<2||sn.length<2||p.replace(/\D/g,"").length<10){toast("Заповніть ім’я, прізвище та телефон (10–12 цифр)");return}
+S.set("gb_user",{name:n,surname:sn,phone:p});updBtn();toast("Вітаємо, "+n+"!");renderAcc();};
+return}
+function endTs(b){var p=b.date.split("-");return new Date(+p[0],p[1]-1,+p[2],b.start+b.h).getTime()}
+var all=S.get("gb_book",[]),nw=Date.now(),b=all.filter(function(x){return endTs(x)>nw}),reg=S.get("gb_reg",[]),bonus=Math.floor(all.reduce(function(s,x){return s+x.sum},0)/10),hrs=all.reduce(function(s,x){return s+x.h},0);
+box.innerHTML='<h2 class="rv">Привіт, '+esc(u.name)+' '+esc(u.surname||"")+'</h2><p class="sub rv">'+esc(u.phone)+'</p><div class="stats" style="margin:0 0 24px"><div class="card rv"><div class="big">'+bonus+'</div><div class="mut">бонусів</div></div><div class="card rv"><div class="big">'+hrs+'</div><div class="mut">годин заброньовано</div></div><div class="card rv"><div class="big">'+reg.length+'</div><div class="mut">турнірів</div></div></div><div class="two"><div class="card rv"><h3>Мої бронювання</h3>'+(b.length?b.map(function(x){return '<div class="item"><div>ПК №'+x.pc+' · '+x.zone+'<div class="mut">'+x.date+', '+x.start+':00, '+x.h+' год · '+x.sum+' ₴</div></div><button class="chip" data-id="'+x.id+'">Скасувати</button></div>'}).join(""):'<p class="mut" style="margin-top:12px">Поки порожньо. <a href="#booking" style="color:var(--g)">Забронювати ПК</a></p>')+'</div><div class="card rv"><h3>Мої турніри</h3>'+(reg.length?reg.map(function(x){return '<div class="item"><span>'+ic("trophy","s")+esc(x)+'</span></div>'}).join(""):'<p class="mut" style="margin-top:12px">Ви ще не зареєстровані. <a href="#tournaments" style="color:var(--g)">Обрати турнір</a></p>')+'</div></div><div class="rv" style="margin-top:20px"><button class="btn o" id="lo">Вийти</button></div>';
+function fmt(t){var d=new Date(t),p=function(n){return (n<10?"0":"")+n};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()+" "+p(d.getHours())+":"+p(d.getMinutes())}
+var done=all.filter(function(x){return endTs(x)<=nw}).map(function(x){return {t:endTs(x),x:x,s:"Завершено",c:0}}).concat(S.get("gb_bh",[]).map(function(x){return {t:x.ts,x:x,s:"Скасовано",c:1}})).sort(function(p,q){return q.t-p.t});
+var hb=done.length?done.map(function(o,i){return '<div class="item hi" style="animation-delay:'+(i*.07)+'s"><div>ПК №'+o.x.pc+' · '+o.x.zone+'<div class="mut">'+o.x.date+', '+o.x.start+':00, '+o.x.h+' год · '+o.x.sum+' ₴</div></div><span class="tag'+(o.c?' c':'')+'">'+o.s+'</span></div>'}).join(""):'<p class="mut" style="margin-top:12px">Історія порожня. Завершені й скасовані бронювання з’являться тут.</p>';
+var tl=S.get("gb_th",[]).slice().reverse();
+var ht=tl.length?tl.map(function(o,i){return '<div class="item hi" style="animation-delay:'+(i*.07)+'s"><div>'+ic("trophy","s")+esc(o.n)+'<div class="mut">'+fmt(o.ts)+'</div></div><span class="tag'+(o.a==="Скасовано"?' c':'')+'">'+o.a+'</span></div>'}).join(""):'<p class="mut" style="margin-top:12px">Історія порожня. Реєстрації на турніри з’являться тут.</p>';
+var hw=document.createElement("div");hw.className="two";hw.style.marginTop="16px";
+hw.innerHTML='<div class="card rv" id="hb"><h3>'+ic("calendar","s")+'Історія бронювань</h3>'+hb+'</div><div class="card rv" id="ht"><h3>'+ic("trophy","s")+'Історія турнірів</h3>'+ht+'</div>';
+box.insertBefore(hw,box.lastElementChild);
+var sc=document.querySelectorAll("#acc .stats .card");
+sc[1].onclick=function(){$("#hb").scrollIntoView({behavior:"smooth",block:"center"})};
+sc[2].onclick=function(){$("#ht").scrollIntoView({behavior:"smooth",block:"center"})};
+document.querySelectorAll("#acc [data-id]").forEach(function(c){c.onclick=function(){var bk=S.get("gb_book",[]),x=bk.filter(function(y){return y.id==c.dataset.id})[0];S.set("gb_book",bk.filter(function(y){return y.id!=c.dataset.id}));if(x){var h2=S.get("gb_bh",[]);x.ts=Date.now();h2.push(x);S.set("gb_bh",h2)}toast("Бронювання скасовано");renderAcc()}});
+$("#lo").onclick=function(){S.set("gb_user",null);updBtn();renderAcc()};
+}
+
+renderGames();renderTours();updBtn();
+window.addEventListener("hashchange",renderTours);
+route();
+</script>
+</body>
+</html>
